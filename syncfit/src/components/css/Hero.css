@@ -1,0 +1,38 @@
+.hero {
+  width: 100vw;
+  height: 100vh;
+  background-color: black;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.hero .type-animation {
+  color: white;
+  font-size: 25px;
+  white-space: pre-line;
+  text-align: center;
+
+  display: block;
+  min-height: 100px;
+}
+
+.hero h1 {
+  margin: 0;
+  color: white;
+  font-size: 100px;
+
+  /* Animation */
+  opacity: 0;
+  animation: fadeIn 2s ease-out forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
