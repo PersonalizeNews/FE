@@ -5,6 +5,7 @@ import Chat from './pages/Chat';
 import Contact from './pages/Contact';
 import Login from './pages/Login'
 import Notfound from './pages/NotFound'
+import NavBar from './components/MobileNav'
 
 const router = createBrowserRouter([
   {
