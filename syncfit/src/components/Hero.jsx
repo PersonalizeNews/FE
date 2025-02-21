@@ -1,22 +1,19 @@
 import React from 'react'
 import './css/Hero.css'
-import { TypeAnimation } from 'react-type-animation'
+import { Link } from 'react-router-dom'
+import hero from '../assets/videos/hero.mp4'
 
 const Hero = () => {
   return (
-    <div className='hero'>
-      <h1>SyncFit</h1>
-      <TypeAnimation
-        className='type-animation'
-        sequence={[
-          `오늘 기분이 너무 좋아\n신나는 노래가 듣고 싶어!`,
-          1000,
-          "",
-        ]}
-        speed={200}
-        repeat={Infinity}
-      />
-    </div>
+    <>
+      <video autoPlay loop muted>
+        <source src={hero} type="video/mp4"/>
+      </video>
+      <div className='hero'>
+        <h1>SyncFit</h1>
+        <Link to="/chat" className='hero-link'>Try now</Link>
+      </div>
+    </>
   )
 }
 
