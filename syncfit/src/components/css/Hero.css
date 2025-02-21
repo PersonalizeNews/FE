@@ -1,13 +1,16 @@
 .hero {
+  position: relative;
   width: 100vw;
   height: 100vh;
-  background-color: black;
+  background-color: rgba(0, 0, 0, 0.6);
 
+  overflow: hidden;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
+
 .hero .type-animation {
   color: white;
   font-size: 25px;
@@ -18,9 +21,20 @@
   min-height: 100px;
 }
 
+video {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; 
+  transform: translate(-50%, -50%);
+  z-index: -1;
+}
+
 .hero h1 {
   margin: 0;
-  color: white;
+  color: #FFD100;
   font-size: 100px;
 
   /* Animation */
@@ -35,4 +49,12 @@
   to {
     opacity: 1;
   }
+}
+
+.hero .hero-link {
+  color: white;
+  font-size: 25px;
+  text-decoration: none;
+  border-bottom: 2px solid white;
+  padding-bottom: 5px;
 }
