@@ -5,6 +5,7 @@ import Chat from './pages/Chat';
 import Contact from './pages/Contact';
 import Login from './pages/Login'
 import Notfound from './pages/NotFound'
+import { LoadingProvider } from './contexts/LoadingContext';
 
 const router = createBrowserRouter([
   {
@@ -32,9 +33,9 @@ const router = createBrowserRouter([
 function App() {
 
   return (
-    <>
+    <LoadingProvider>
       <RouterProvider router={router} />
-    </>
+    </LoadingProvider>
   )
 }
 

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import { GiHamburgerMenu } from "react-icons/gi";
 import "../../css/MobileNav.css";
 
@@ -12,6 +12,10 @@ const links = [
 
 const NavBar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const location = useLocation();
+
+  const darkPages = ['/', '/chat'];
+  const iconColor = darkPages.includes(location.pathname) ? 'white' : 'black';
 
   return (
     <div>
@@ -19,20 +23,21 @@ const NavBar = () => {
         className="NavButton"
         onClick={() => setIsOpen(!isOpen)}
       >
-        <GiHamburgerMenu className="NavIcon"/>
+        <GiHamburgerMenu 
+          className="NavIcon" 
+          style={{ color: iconColor }} 
+        />
       </button>
 
-      {/* 사이드바 메뉴 */}
       <div className={`SideBar ${isOpen ? "open" : ""}`}>
         <div className="SideBar-Content">
-          {/* 네비게이션 */}
           <nav className="Nav-Links">
             {links.map((link, index) => (
               <NavLink
                 key={index}
                 to={link.path}
                 className="Nav-Item"
-                activeClassName="active"  // NavLink에서 제공하는 activeClassName
+                activeClassName="active"
                 onClick={() => setIsOpen(false)}
               >
                 {link.name}
