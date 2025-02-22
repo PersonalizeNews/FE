@@ -1,0 +1,32 @@
+.intro-one {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: var(--sliver);
+}
+
+.intro-one-card {
+  background: var(--primary);
+  padding: 40px;
+  border-radius: 20px;
+  cursor: grab;
+  text-align: center;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+.intro-one-card:active {
+  cursor: grabbing;
+}
+
+.intro-one-text {
+  font-size: 2.5rem;
+  margin: 0;
+  color: var(--black);
+}
+
+.intro-one-subtext {
+  font-size: 1.2rem;
+  margin-top: 10px;
+  color: var(--grey-blue);
+}
