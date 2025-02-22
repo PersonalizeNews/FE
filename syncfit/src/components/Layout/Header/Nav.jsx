@@ -1,16 +1,15 @@
-import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import '../../css/Nav.css';
 
 const links = [
   { name: 'Home', path: '/' },
-  { name: 'Chat', path: '/chat' },
+  { name: 'Send', path: '/send' },
   { name: 'Contact', path: '/contact' },
   { name: 'Login', path: '/login' },
 ];
 
 const Nav = () => {
-  const location = useLocation(); 
+  const location = useLocation();
 
   return (
     <nav className="nav">

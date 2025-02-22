@@ -5,7 +5,7 @@ import "../../css/MobileNav.css";
 
 const links = [
   { name: 'Home', path: '/' },
-  { name: 'Chat', path: '/chat' },
+  { name: 'Send', path: '/send' },
   { name: 'Contact', path: '/contact' },
   { name: 'Login', path: '/login' },
 ];
@@ -14,7 +14,7 @@ const NavBar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
 
-  const darkPages = ['/', '/chat'];
+  const darkPages = ['/', '/send'];
   const iconColor = darkPages.includes(location.pathname) ? 'white' : 'black';
 
   return (
@@ -23,9 +23,9 @@ const NavBar = () => {
         className="NavButton"
         onClick={() => setIsOpen(!isOpen)}
       >
-        <GiHamburgerMenu 
-          className="NavIcon" 
-          style={{ color: iconColor }} 
+        <GiHamburgerMenu
+          className="NavIcon"
+          style={{ color: iconColor }}
         />
       </button>
 

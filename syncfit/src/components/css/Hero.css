@@ -58,3 +58,17 @@ video {
   border-bottom: 2px solid white;
   padding-bottom: 5px;
 }
+
+.hero .hero-link:hover {
+  color: var(--hover-color)
+}
+
+@media (min-width: 1024px) {
+  .hero h1 {
+    font-size: 200px;
+  }
+
+  .hero .hero-link {
+    font-size: 40px;
+  }
+}

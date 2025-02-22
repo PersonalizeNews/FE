@@ -1,7 +1,7 @@
 import './App.css'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import Home from './pages/Home';
-import Chat from './pages/Chat';
+import Send from './pages/Send';
 import Contact from './pages/Contact';
 import Login from './pages/Login'
 import Notfound from './pages/NotFound'
@@ -13,8 +13,8 @@ const router = createBrowserRouter([
     element: <Home />,
   },
   {
-    path: "/chat",
-    element: <Chat />,
+    path: "/send",
+    element: <Send />,
   },
   {
     path: "/contact",

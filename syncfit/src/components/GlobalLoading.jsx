@@ -1,6 +1,7 @@
 import React from 'react';
 import Lottie from 'lottie-react';
 import loadingAnimation from '../assets/animations/loadingLottie.json';
+import './css/GlobalLoading.css'
 
 const GlobalLoading = () => {
   return (

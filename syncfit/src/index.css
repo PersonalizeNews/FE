@@ -17,3 +17,10 @@ body {
 :lang(en) {
     font-family: 'Limelight', sans-serif;
 }
+
+:root {
+    --accent-color: #FFD100;
+    --hover-color: rgb(160, 160, 160);
+    --button-hover-color: #FFE055;
+    --toss-blue-color: #3288FF;
+}

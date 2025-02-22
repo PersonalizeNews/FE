@@ -7,11 +7,11 @@ const Hero = () => {
   return (
     <>
       <video autoPlay loop muted>
-        <source src={hero} type="video/mp4"/>
+        <source src={hero} type="video/mp4" />
       </video>
       <div className='hero'>
         <h1>SyncFit</h1>
-        <Link to="/chat" className='hero-link'>Try now</Link>
+        <Link to="/send" className='hero-link'>Try now</Link>
       </div>
     </>
   )

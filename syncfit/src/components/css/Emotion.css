@@ -27,6 +27,7 @@ video {
 }
 
 .emotion h3 {
+  font-size: 1rem;
   color: #a9a9a9;
 }
 
@@ -47,6 +48,11 @@ video {
   border-radius: 10px;
 }
 
+.emotion textarea:focus {
+  border: 4px solid #FCA311;
+  outline: none;
+}
+
 .emotion button {
   width: 100%;
   padding: 0.5rem 1rem;
@@ -54,8 +60,36 @@ video {
   cursor: pointer;
   background: #FFD100;
   color: white;
-  font-weight: 700;
+  font-weight: 800;
   border: none;
   border-radius: 5px;
   transition: background 0.3s ease;
+}
+
+.emotion button:hover {
+  background-color: var(--button-hover-color);
+  color: var(--hover-color);
+}
+
+@media (min-width: 1024px) {
+  .emotion h1 {
+    font-size: 4rem;
+    color: #FFD100;
+  }
+
+  .emotion h3 {
+    font-size: 2rem;
+  }
+
+  .emotion textarea {
+    padding: 1rem;
+    width: 500px;
+  
+    font-size: 1.5rem;
+  }
+
+  .emotion button {
+    font-size: 1.5rem;
+    padding: 1rem 1.5rem;
+  }
 }
