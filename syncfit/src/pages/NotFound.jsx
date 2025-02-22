@@ -1,4 +1,3 @@
-import React from 'react'
 import Layout from '../components/Layout/Layout'
 import Error404 from '../components/Error404'
 

@@ -13,7 +13,7 @@
     font-size: 28px;
     color: white;
 }
-  
+
 .SideBar {
     position: fixed;
     top: 0;
@@ -25,11 +25,11 @@
     transition: right 0.3s ease-in-out;
     z-index: 1000;
 }
-  
+
 .SideBar.open {
     right: 0;
 }
-  
+
 .SideBar-Content {
     display: flex;
     flex-direction: column;
@@ -37,24 +37,25 @@
     justify-content: center; 
     height: 100%; 
 }
-  
+
 /* 네비게이션 스타일 */
 .Nav-Links {
     display: flex;
     flex-direction: column;
     gap: 30px;
 }
-  
+
 .Nav-Item {
     text-decoration: none;
     color: white;
     font-size: 20px;
     transition: 0.3s;
 }
-  
-.Nav-Item:hover,
-.Nav-Item.active {
-    color: rgb(216,216,216);
-    border-bottom: 2px solid rgb(256, 256, 256);
+
+.Nav-Item:hover {
+    color: var(--l-grey);
 }
-  
+
+.Nav-Item.active {
+    color: var(--primary);
+}

@@ -1,7 +1,7 @@
 import './App.css'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import Home from './pages/Home';
-import Send from './pages/Send';
+import Emotion from './pages/Emotion';
 import Contact from './pages/Contact';
 import Login from './pages/Login'
 import Notfound from './pages/NotFound'
@@ -13,8 +13,8 @@ const router = createBrowserRouter([
     element: <Home />,
   },
   {
-    path: "/send",
-    element: <Send />,
+    path: "/emotion",
+    element: <Emotion />,
   },
   {
     path: "/contact",

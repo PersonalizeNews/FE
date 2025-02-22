@@ -1,12 +1,13 @@
-import Hero from '../components/Hero'
+import Message from '../components/Message'
 import WithoutFooterLayout from '../components/Layout/WithoutFooterLayout'
 
-const Home = () => {
+const Emotion = () => {
   return (
     <WithoutFooterLayout>
-      <Hero />
+      <Message />
     </WithoutFooterLayout>
+
   )
 }
 
-export default Home
+export default Emotion

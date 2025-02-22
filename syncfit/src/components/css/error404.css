@@ -1,6 +1,6 @@
-.notfound {
+.error404 {
   width: 100vw;
-  height: 92.5vh;
+  height: 93vh;
   background-color: #FFD100;
   
   display: flex;
@@ -9,19 +9,21 @@
   align-items: center;
 }
 
-.notfound-content {
+.error404-content {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
+  color: var(--black)
 }
 
-.notfound-content h1 {
+.error404-content h1 {
   font-size: 100px;
   margin: 10px 0;
 }
 
-.notfound-content .notfound-link {
+.error404-content .error404-link {
   color: black;
   font-size: 25px;
   text-decoration: none;

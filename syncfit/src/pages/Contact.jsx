@@ -1,11 +1,11 @@
-import React from 'react'
-import Layout from '../components/Layout/Layout'
+import WithoutFooterLayout from '../components/Layout/WithoutFooterLayout'
+import Info from '../components/Info'
 
 const Contact = () => {
   return (
-    <Layout>
-      Contact
-    </Layout>
+    <WithoutFooterLayout>
+      <Info />
+    </WithoutFooterLayout>
   )
 }
 

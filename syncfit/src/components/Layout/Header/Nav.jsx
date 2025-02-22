@@ -3,7 +3,7 @@ import '../../css/Nav.css';
 
 const links = [
   { name: 'Home', path: '/' },
-  { name: 'Send', path: '/send' },
+  { name: 'Emotion', path: '/emotion' },
   { name: 'Contact', path: '/contact' },
   { name: 'Login', path: '/login' },
 ];
@@ -11,13 +11,16 @@ const links = [
 const Nav = () => {
   const location = useLocation();
 
+  const darkPages = ['/', '/emotion'];
+  const isDark = darkPages.includes(location.pathname);
+
   return (
     <nav className="nav">
       {links.map((link, index) => (
         <Link
           to={link.path}
           key={index}
-          className={`${link.path === location.pathname ? 'nav-link-active' : 'nav-link'}`}
+          className={`nav-link nav-link-${isDark ? 'dark' : 'light'} ${link.path === location.pathname ? 'nav-link-active' : 'nav-link'}`}
         >
           {link.name}
         </Link>

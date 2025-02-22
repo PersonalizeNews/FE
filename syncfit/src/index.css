@@ -19,8 +19,27 @@ body {
 }
 
 :root {
-    --accent-color: #FFD100;
-    --hover-color: rgb(160, 160, 160);
-    --button-hover-color: #FFE055;
-    --toss-blue-color: #3288FF;
+    --primary: #FFD100;
+    --secendary: #E86912;
+    --info: #3288FF;
+    --black: #263238;
+    --d-grey: #4D4D4D;
+    --grey: #717171;
+    --l-grey: #89939E;
+    --grey-blue: #ABBED1;
+    --sliver: #F5F7FA;
+
+    --shade-1: #FFD100;
+    --shade-2: #E7BE00; 
+    --shade-3: #C9A400;
+    --shade-4: #A38600;
+
+    --tint-1: #FFD100;
+    --tint-2: #FFD61C;
+    --tint-3: #FFE051;
+    --tint-4: #FFEA8D;
+    --tint-5: #FFF1B2;
+
+    --error: #EE4452;
+    --sucess: #3288FF;
 }

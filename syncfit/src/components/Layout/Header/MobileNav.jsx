@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import { GiHamburgerMenu } from "react-icons/gi";
 import "../../css/MobileNav.css";
 
 const links = [
   { name: 'Home', path: '/' },
-  { name: 'Send', path: '/send' },
+  { name: 'Emotion', path: '/emotion' },
   { name: 'Contact', path: '/contact' },
   { name: 'Login', path: '/login' },
 ];
@@ -14,7 +14,7 @@ const NavBar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
 
-  const darkPages = ['/', '/send'];
+  const darkPages = ['/', '/emotion'];
   const iconColor = darkPages.includes(location.pathname) ? 'white' : 'black';
 
   return (
