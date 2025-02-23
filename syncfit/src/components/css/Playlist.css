@@ -1,0 +1,113 @@
+.intro-two {
+  background: white;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  padding: 20px;
+}
+
+/* 모바일 등 작은 화면에서는 기본 flex 컬럼 레이아웃 */
+.playlist-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+  max-width: 400px;
+  cursor: grab;
+}
+
+.playlist-container:active {
+  cursor: grabbing;
+}
+
+.playlist-item {
+  background: var(--primary);
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.1);
+  transform-origin: center;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.playlist-item h3 {
+  margin: 10px 0 0;
+  color: var(--black);
+  font-size: 1.4rem;
+  font-weight: bold;
+}
+
+.playlist-item p {
+  margin: 8px 0 0;
+  color: var(--grey);
+  font-size: 1rem;
+}
+
+.album-name {
+  margin-top: 8px;
+  color: var(--grey);
+  font-size: 0.9rem;
+}
+
+.album-image {
+  width: 100%;
+  max-width: 200px;
+  border-radius: 8px;
+}
+
+/* 데스크탑 등 넓은 화면에서 3열 grid 레이아웃 적용 */
+@media screen and (min-width: 1024px) {
+  .playlist-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    max-width: 1200px;
+  }
+}
+
+/* 모달 오버레이 스타일 */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+/* 모달 콘텐츠 스타일 */
+.modal-content {
+  background: white;
+  padding: 40px;
+  border-radius: 12px;
+  position: relative;
+  max-width: 90%;
+  text-align: center;
+}
+
+/* 닫기 버튼 스타일 */
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: transparent;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+/* 모달 내 앨범 이미지 스타일 */
+.modal-album-image {
+  width: 100%;
+  max-width: 300px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}

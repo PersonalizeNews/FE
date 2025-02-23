@@ -1,0 +1,47 @@
+.contact-card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: var(--sliver);
+}
+
+.contact-card-motion {
+  background: var(--primary);
+  padding: 40px;
+  border-radius: 20px;
+  cursor: grab;
+  text-align: center;
+  box-shadow: 0 20px 20px rgba(0, 0, 0, 0.15);
+  white-space: pre-line;
+}
+
+.contact-card-motion:active {
+  cursor: grabbing;
+}
+
+.contact-card-title {
+  font-size: 2.5rem;
+  margin: 0;
+  color: var(--black);
+}
+
+.contact-card-icons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  margin: 20px 0px;
+}
+
+.contact-card-icons a {
+  color: inherit;
+}
+
+
+@media (min-width: 1024px) {
+  .contact-card-motion {
+    min-height: 300px;
+    max-width: 500px;
+  }
+}

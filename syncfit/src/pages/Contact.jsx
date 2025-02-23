@@ -1,10 +1,10 @@
 import WithoutFooterLayout from '../components/Layout/WithoutFooterLayout'
-import Info from '../components/Info'
+import ContactCard from '../components/ContactCard'
 
 const Contact = () => {
   return (
     <WithoutFooterLayout>
-      <Info />
+      <ContactCard />
     </WithoutFooterLayout>
   )
 }
