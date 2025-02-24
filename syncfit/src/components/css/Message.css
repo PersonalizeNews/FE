@@ -73,7 +73,7 @@ video {
 }
 
 .message button:hover {
-  background-color: var(--shade-4);
+  background-color: var(--secondary);
 }
 
 /* 반응형 Desktop */

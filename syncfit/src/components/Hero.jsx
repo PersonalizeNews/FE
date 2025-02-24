@@ -1,6 +1,6 @@
 import './css/Hero.css'
-import { Link } from 'react-router-dom'
 import hero from '../assets/videos/hero.mp4'
+import CustomLink from './CustomLink'
 
 const Hero = () => {
   return (
@@ -10,7 +10,7 @@ const Hero = () => {
       </video>
       <div className='hero'>
         <h1>SyncFit</h1>
-        <Link to="/emotion" className='hero-link'>Try now</Link>
+        <CustomLink to={"/emotion"} className={"hero-link"} text={"Try now"}/>
       </div>
     </>
   )
