@@ -6,7 +6,7 @@ import "../../css/MobileNav.css";
 const links = [
   { name: 'Home', path: '/' },
   { name: 'Emotion', path: '/emotion' },
-  { name: 'Contact', path: '/contact' },
+  { name: 'AboutUs', path: '/aboutus' },
   { name: 'MyPage', path: '/mypage' },
 ];
 

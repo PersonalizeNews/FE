@@ -2,9 +2,9 @@ import { useRef } from 'react';
 import { motion, useMotionValue, useTransform } from 'framer-motion';
 import { FaGithub } from 'react-icons/fa';
 import { SiNotion } from 'react-icons/si';
-import './css/ContactCard.css';
+import './css/AboutUsCard.css';
 
-const ContactCard = () => {
+const AboutUsCard = () => {
   const dragRef = useRef(null);
   const x = useMotionValue(0);
   const rotate = useTransform(x, [-200, 200], [-20, 20]);
@@ -42,4 +42,4 @@ const ContactCard = () => {
   );
 };
 
-export default ContactCard;
+export default AboutUsCard;

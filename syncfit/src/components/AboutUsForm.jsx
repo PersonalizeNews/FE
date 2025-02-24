@@ -1,7 +1,7 @@
 import React from 'react';
-import './css/ContactForm.css';
+import './css/AboutUsForm.css';
 
-const ContactForm = () => {
+const AboutUsForm = () => {
   return (
       <section className="contact">
         <h1>Contact</h1>
@@ -40,4 +40,4 @@ const ContactForm = () => {
   );
 };
 
-export default ContactForm;
+export default AboutUsForm;

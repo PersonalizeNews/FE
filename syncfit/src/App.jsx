@@ -2,7 +2,7 @@ import './App.css'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import Home from './pages/Home';
 import Emotion from './pages/Emotion';
-import Contact from './pages/Contact';
+import AboutUs from './pages/AboutUs';
 import MyPage from './pages/MyPage'
 import Notfound from './pages/NotFound'
 import OAuthCallback from './pages/OAuthCallback';
@@ -24,8 +24,8 @@ const router = createBrowserRouter([
     element: <WishList />,
   },
   {
-    path: "/contact",
-    element: <Contact />,
+    path: "/aboutus",
+    element: <AboutUs />,
   },
   {
     path: "/mypage",
