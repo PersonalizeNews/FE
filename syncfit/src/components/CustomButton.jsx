@@ -1,7 +1,7 @@
 import React from 'react'
 import { motion } from 'motion/react'
 
-const CustomButton = ({ type, text, className }) => {
+const CustomButton = ({ type, text, className, onClick }) => {
   return (
     <motion.div
       whileHover={{ scale: 1.05 }}

@@ -1,12 +1,16 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import "./css/Message.css";
 import emotion from '../assets/videos/emotion.mp4'
 import { TypeAnimation } from 'react-type-animation';
 import CustomButton from './CustomButton';
+import { AuthContext } from '../contexts/AuthContext';
+import { useNavigate } from 'react-router-dom';
 // import { useLoading } from '../contexts/LoadingContext';
 
 const Message = () => {
   const [input, setInput] = useState("");
+  const { accessToken } = useContext(AuthContext);
+  const nav = useNavigate();
   // const { setLoading } = useLoading();
 
   // const handleInputChange = (e) => {
@@ -15,7 +19,15 @@ const Message = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // setLoading(true);
+    if (!accessToken) {
+      alert("로그인이 필요한 서비스입니다.");
+      nav("/mypage", { replace: true });
+      return;
+    }
+    // accessToken이 존재하면 실제 submit 로직 실행
+    // 예: 서버에 메시지 전송 요청
+    console.log("전송할 메시지:", input);
+    // 예시: setLoading(true);
   };
 
   return (

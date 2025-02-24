@@ -7,6 +7,7 @@ import MyPage from './pages/MyPage'
 import Notfound from './pages/NotFound'
 import OAuthCallback from './pages/OAuthCallback';
 import { LoadingProvider } from './contexts/LoadingContext';
+import { AuthProvider } from './contexts/AuthContext';
 
 const router = createBrowserRouter([
   {
@@ -38,9 +39,11 @@ const router = createBrowserRouter([
 function App() {
 
   return (
-    <LoadingProvider>
-      <RouterProvider router={router} />
-    </LoadingProvider>
+    <AuthProvider>
+      <LoadingProvider>
+        <RouterProvider router={router} />
+      </LoadingProvider>
+    </AuthProvider>
   )
 }
 
