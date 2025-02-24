@@ -1,12 +1,14 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useContext } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useLoading } from '../contexts/LoadingContext';
+import { AuthContext } from '../contexts/AuthContext';
 import axios from 'axios';
 
 const OAuthCallback = () => {
   const location = useLocation();
   const nav = useNavigate();
   const { setLoading } = useLoading();
+  const { login } = useContext(AuthContext); 
 
   useEffect(() => {
     setLoading(true);
@@ -22,7 +24,7 @@ const OAuthCallback = () => {
           console.log('로그인 성공:', response.data.data.accessToken);
           
           localStorage.setItem("accessToken", response.data.data.accessToken);
-    
+          login(response.data.data.accessToken);
           setLoading(false)
           nav('/', { replace: true });
         })
