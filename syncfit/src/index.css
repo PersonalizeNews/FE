@@ -3,13 +3,14 @@
 @font-face {
     font-family: 'Moneygraphy-Rounded';
     src: url('./assets/fonts/Moneygraphy-Rounded.otf');
+    unicode-range: U+AC00-D7A3;
 }
 
 body {
     margin: 0;
     padding: 0;
+    font-family: 'Moneygraphy-Rounded' sans-serif;
 }
-
 
 /* 영어만 따로 Limelight 적용 */
 :lang(en) {

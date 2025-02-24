@@ -6,6 +6,10 @@
   background: var(--sliver);
 }
 
+.contact-card-content {
+  font-family: 'Moneygraphy-Rounded';
+}
+
 .contact-card-motion {
   background: var(--primary);
   padding: 40px;

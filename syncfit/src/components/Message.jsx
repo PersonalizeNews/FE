@@ -2,7 +2,7 @@ import { useState } from 'react';
 import "./css/Message.css";
 import emotion from '../assets/videos/emotion.mp4'
 import { TypeAnimation } from 'react-type-animation';
-import { motion } from 'motion/react'
+import CustomButton from './CustomButton';
 // import { useLoading } from '../contexts/LoadingContext';
 
 const Message = () => {
@@ -45,13 +45,7 @@ const Message = () => {
           rows={4}
           cols={40}
         />
-        <motion.button
-          type="submit"
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-        >
-          전송
-        </motion.button>
+        <CustomButton type={"submit"} text={"전송"} className={"message-button"}/>
       </form>
     </div>
   );
