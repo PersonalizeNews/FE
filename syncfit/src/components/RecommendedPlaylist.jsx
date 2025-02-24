@@ -3,13 +3,14 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useLocation } from 'react-router-dom';
 import gsap from 'gsap';
 import './css/Playlist.css';
+import { mockData } from '../utils/getMockData';
 
 
 const containerVariants = {
   hidden: {},
   visible: {
     transition: {
-      staggerChildren: 0.15,
+      staggerChildren: 0.3,
     },
   },
 };
@@ -20,26 +21,27 @@ const itemVariants = {
     opacity: 1,
     y: 0,
     scale: 1,
-    transition: { duration: 0.6, ease: [0.6, -0.05, 0.01, 0.99] }
+    transition: { duration: 1, ease: [0.6, -0.05, 0.01, 0.99] }
   },
 };
 
 const overlayVariants = {
   hidden: { opacity: 0 },
-  visible: { opacity: 1, transition: { duration: 0.3 } }
+  visible: { opacity: 1, transition: { duration: 1 } }
 };
 
 const modalVariants = {
   hidden: { y: "-100vh", opacity: 0 },
-  visible: { y: "0", opacity: 1, transition: { duration: 0.5 } }
+  visible: { y: "0", opacity: 1, transition: { duration: 0.7 } }
 };
 
 const Playlist = () => {
   const containerRef = useRef(null);
   const [selectedItem, setSelectedItem] = useState(null);
-  const location = useLocation();
+  const recommendationData = mockData;
+  // const location = useLocation();
 
-  const recommendationData = location.state?.recommendationData;
+  // const recommendationData = location.state?.recommendationData;
   
   useEffect(() => {
     gsap.fromTo(
