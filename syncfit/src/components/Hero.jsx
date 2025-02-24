@@ -5,7 +5,7 @@ import CustomLink from './CustomLink'
 const Hero = () => {
   return (
     <>
-      <video autoPlay loop muted>
+     <video autoPlay loop muted>
         <source src={hero} type="video/mp4" />
       </video>
       <div className='hero'>
@@ -16,4 +16,4 @@ const Hero = () => {
   )
 }
 
-export default Hero
+export default Hero;

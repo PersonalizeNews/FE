@@ -38,6 +38,10 @@
     height: 100%; 
 }
 
+.NavButton:hover {
+    background-color: transparent;
+}
+
 /* 네비게이션 스타일 */
 .Nav-Links {
     display: flex;

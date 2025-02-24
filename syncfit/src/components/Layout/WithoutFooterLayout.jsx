@@ -1,7 +1,7 @@
 import React from 'react'
 import Header from './Header/Header'
 
-const Layout = (props) => {
+const WithoutFooterLayout = (props) => {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
       <Header />
@@ -12,4 +12,4 @@ const Layout = (props) => {
   )
 }
 
-export default Layout
+export default WithoutFooterLayout
