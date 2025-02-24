@@ -1,4 +1,5 @@
 import React, { createContext, useState, useEffect } from 'react';
+import { socialLogout } from '../apis/AuthApi';
 
 export const AuthContext = createContext();
 
@@ -19,7 +20,12 @@ export const AuthProvider = ({ children }) => {
 
   const logout = () => {
     setAccessToken(null);
-    localStorage.removeItem("accessToken");
+    socialLogout(accessToken)
+      .then(res => {
+        console.log(res)
+        localStorage.removeItem("accessToken");
+      })
+      .catch(err => console.log(err))
   };
 
   return (

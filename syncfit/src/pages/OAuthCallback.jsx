@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { useLoading } from '../contexts/LoadingContext';
 import { AuthContext } from '../contexts/AuthContext';
 import axios from 'axios';
+import { socialLogin } from '../apis/AuthApi';
 
 const OAuthCallback = () => {
   const location = useLocation();
@@ -16,10 +17,7 @@ const OAuthCallback = () => {
     const code = searchParams.get('code');
 
     if (code) {
-      axios
-        .post('http://ec2-43-202-146-45.ap-northeast-2.compute.amazonaws.com:8080/auth/social-login', { code }, {
-          headers: { 'Content-Type': 'application/json' }
-        })
+      socialLogin(code)
         .then(response => {
           console.log('로그인 성공:', response.data.data.accessToken);
           
@@ -31,7 +29,7 @@ const OAuthCallback = () => {
         .catch(error => {
           console.error('토큰 요청 실패:', error.response ? error.response.data : error.message);
           setLoading(false)
-          nav('/login', { replace: true });
+          nav('/mypage', { replace: true });
         });
     } else {
       nav('/', { replace: true });

@@ -8,6 +8,7 @@ import Notfound from './pages/NotFound'
 import OAuthCallback from './pages/OAuthCallback';
 import { LoadingProvider } from './contexts/LoadingContext';
 import { AuthProvider } from './contexts/AuthContext';
+import WishList from './pages/WishList';
 
 const router = createBrowserRouter([
   {
@@ -17,6 +18,10 @@ const router = createBrowserRouter([
   {
     path: "/emotion",
     element: <Emotion />,
+  },
+  {
+    path: "/wishlist",
+    element: <WishList />,
   },
   {
     path: "/contact",
