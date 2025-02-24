@@ -3,7 +3,7 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import Home from './pages/Home';
 import Emotion from './pages/Emotion';
 import Contact from './pages/Contact';
-import Login from './pages/Login'
+import MyPage from './pages/MyPage'
 import Notfound from './pages/NotFound'
 import OAuthCallback from './pages/OAuthCallback';
 import { LoadingProvider } from './contexts/LoadingContext';
@@ -22,8 +22,8 @@ const router = createBrowserRouter([
     element: <Contact />,
   },
   {
-    path: "/login",
-    element: <Login />,
+    path: "/mypage",
+    element: <MyPage />,
   },
   {
     path: "/auth/kakao/callback",

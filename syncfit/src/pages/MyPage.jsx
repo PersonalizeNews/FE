@@ -1,7 +1,7 @@
 import WithoutFooterLayout from '../components/Layout/WithoutFooterLayout'
 import SocialLogin from '../components/SocialLogin'
 
-const Login = () => {
+const MyPage = () => {
   return (
     <WithoutFooterLayout>
       <SocialLogin />
@@ -9,4 +9,4 @@ const Login = () => {
   )
 }
 
-export default Login
+export default MyPage

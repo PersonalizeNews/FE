@@ -7,7 +7,7 @@ const links = [
   { name: 'Home', path: '/' },
   { name: 'Emotion', path: '/emotion' },
   { name: 'Contact', path: '/contact' },
-  { name: 'Login', path: '/login' },
+  { name: 'MyPage', path: '/mypage' },
 ];
 
 const NavBar = () => {
