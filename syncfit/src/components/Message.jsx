@@ -5,14 +5,14 @@ import { TypeAnimation } from 'react-type-animation';
 import CustomButton from './CustomButton';
 import { AuthContext } from '../contexts/AuthContext';
 import { useNavigate } from 'react-router-dom';
-// import { useLoading } from '../contexts/LoadingContext';
+import { useLoading } from '../contexts/LoadingContext';
 import { musicRecommendation } from '../apis/MusicApi';
 
 const Message = () => {
   const [input, setInput] = useState("");
   const { accessToken } = useContext(AuthContext);
   const nav = useNavigate();
-  // const { setLoading } = useLoading();
+  const { setLoading } = useLoading();
 
   const handleInputChange = (e) => {
    setInput(e.target.value);
@@ -27,13 +27,13 @@ const Message = () => {
       return;
     }
 
-    console.log(input);
-
     try {
-      const payload = { "input" : input };
-      const response = await musicRecommendation(payload);
-      console.log("음악 추천 결과:", response.data);
-      // 추천 결과 처리 로직 추가 가능
+      const payload = {"input": input };
+      setLoading(true);
+      const recommendationData = await musicRecommendation(payload, accessToken);
+      setLoading(false); 
+      
+      nav("/playlist", { state: { recommendationData } });
     } catch (error) {
       console.error("음악 추천 요청 실패:", error.response ? error.response.data : error.message);
     }
