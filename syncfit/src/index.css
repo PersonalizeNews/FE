@@ -3,7 +3,6 @@
 @font-face {
     font-family: 'Moneygraphy-Rounded';
     src: url('./assets/fonts/Moneygraphy-Rounded.otf');
-    unicode-range: U+AC00-D7A3;
 }
 
 body {
@@ -41,4 +40,6 @@ body {
 
     --error: #EE4452;
     --sucess: #3288FF;
+
+    --kakao: #FFEB00;
 }

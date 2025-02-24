@@ -1,4 +1,4 @@
-.socialLogin {
+.social-login {
   width: 100vw;
   height: 100vh;
   
@@ -8,6 +8,6 @@
   align-items: center;
 }
 
-.socialLogin img {
+.social-login img {
   width: 300px
 }
