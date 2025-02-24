@@ -6,6 +6,7 @@ import CustomButton from './CustomButton';
 import { AuthContext } from '../contexts/AuthContext';
 import { useNavigate } from 'react-router-dom';
 // import { useLoading } from '../contexts/LoadingContext';
+import { musicRecommendation } from '../apis/MusicApi';
 
 const Message = () => {
   const [input, setInput] = useState("");
@@ -13,21 +14,29 @@ const Message = () => {
   const nav = useNavigate();
   // const { setLoading } = useLoading();
 
-  // const handleInputChange = (e) => {
-  //   setInput(e.target.value);
-  // };
+  const handleInputChange = (e) => {
+   setInput(e.target.value);
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     if (!accessToken) {
       alert("로그인이 필요한 서비스입니다.");
       nav("/mypage", { replace: true });
       return;
     }
-    // accessToken이 존재하면 실제 submit 로직 실행
-    // 예: 서버에 메시지 전송 요청
-    console.log("전송할 메시지:", input);
-    // 예시: setLoading(true);
+
+    console.log(input);
+
+    try {
+      const payload = { "input" : input };
+      const response = await musicRecommendation(payload);
+      console.log("음악 추천 결과:", response.data);
+      // 추천 결과 처리 로직 추가 가능
+    } catch (error) {
+      console.error("음악 추천 요청 실패:", error.response ? error.response.data : error.message);
+    }
   };
 
   return (
@@ -56,6 +65,8 @@ const Message = () => {
           placeholder='기분을 입력하세요'
           rows={4}
           cols={40}
+          value={input}
+          onChange={handleInputChange}
         />
         <CustomButton type={"submit"} text={"전송"} className={"message-button"}/>
       </form>
