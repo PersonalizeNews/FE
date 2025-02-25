@@ -10,6 +10,7 @@ import { LoadingProvider } from './contexts/LoadingContext';
 import { AuthProvider } from './contexts/AuthContext';
 import WishList from './pages/WishList';
 import PlayList from './pages/PlayList';
+import Admin from './pages/Admin'
 
 const router = createBrowserRouter([
   {
@@ -35,6 +36,10 @@ const router = createBrowserRouter([
   {
     path: "/mypage",
     element: <MyPage />,
+  },
+  {
+    path: "/admin",
+    element: <Admin />,
   },
   {
     path: "/auth/kakao/callback",
