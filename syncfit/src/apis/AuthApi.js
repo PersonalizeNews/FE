@@ -17,3 +17,10 @@ export const socialLogout = (accessToken) => {
     { headers: { 'Authorization': `Bearer ${accessToken}`}}
   )
 }
+
+export const userInfo = (accessToken) => {
+  return axios.get(
+    `${BASE_URL}/members/me`,
+    { headers: { 'Authorization': `Bearer ${accessToken}` } }
+  );
+}

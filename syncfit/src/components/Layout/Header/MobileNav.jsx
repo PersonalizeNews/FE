@@ -6,6 +6,7 @@ import "../../css/MobileNav.css";
 const links = [
   { name: 'Home', path: '/' },
   { name: 'Emotion', path: '/emotion' },
+  { name: 'Wishlist', path: '/wishlist' },
   { name: 'AboutUs', path: '/aboutus' },
   { name: 'MyPage', path: '/mypage' },
 ];
@@ -14,7 +15,7 @@ const NavBar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
 
-  const darkPages = ['/', '/emotion'];
+  const darkPages = ['/', '/emotion', '/wishlist'];
   const iconColor = darkPages.includes(location.pathname) ? 'white' : 'black';
 
   return (

@@ -8,7 +8,7 @@ const CustomButton = ({ type, text, className, onClick }) => {
       whileTap={{ scale: 0.95 }}
       style={{ width: "100%" }}
     >
-      <button type={type} className={className} style={{fontFamily: 'Moneygraphy-Rounded'}}>{text}</button>
+      <button type={type} className={className} style={{fontFamily: 'Moneygraphy-Rounded'}} onClick={onClick}>{text}</button>
     </motion.div>
   )
 }

@@ -7,6 +7,7 @@ import { AuthContext } from '../contexts/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import { useLoading } from '../contexts/LoadingContext';
 import { musicRecommendation } from '../apis/MusicApi';
+import { mockData } from '../utils/getMockData'
 
 const Message = () => {
   const [input, setInput] = useState("");
@@ -30,7 +31,8 @@ const Message = () => {
     try {
       const payload = {"input": input };
       setLoading(true);
-      const recommendationData = await musicRecommendation(payload, accessToken);
+      const recommendationData = mockData;
+      // const recommendationData = await musicRecommendation(payload, accessToken);
       setLoading(false); 
       
       nav("/playlist", { state: { recommendationData } });

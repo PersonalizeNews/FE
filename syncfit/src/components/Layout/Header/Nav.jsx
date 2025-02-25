@@ -4,6 +4,7 @@ import '../../css/Nav.css';
 const links = [
   { name: 'Home', path: '/' },
   { name: 'Emotion', path: '/emotion' },
+  { name: 'Wishlist', path: '/wishlist' },
   { name: 'AboutUs', path: '/aboutus' },
   { name: 'MyPage', path: '/mypage' },
 ];
@@ -11,7 +12,7 @@ const links = [
 const Nav = () => {
   const location = useLocation();
 
-  const darkPages = ['/', '/emotion'];
+  const darkPages = ['/', '/emotion', '/wishlist'];
   const isDark = darkPages.includes(location.pathname);
 
   return (
