@@ -2,7 +2,7 @@ import React, { useRef, useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useLocation } from 'react-router-dom';
 import gsap from 'gsap';
-import './css/Playlist.css';
+import './css/RecommendedPlaylist.css';
 import { mockData } from '../utils/getMockData';
 
 
@@ -35,7 +35,7 @@ const modalVariants = {
   visible: { y: "0", opacity: 1, transition: { duration: 0.7 } }
 };
 
-const Playlist = () => {
+const RecommendedPlaylist = () => {
   const containerRef = useRef(null);
   const [selectedItem, setSelectedItem] = useState(null);
   const recommendationData = mockData;
@@ -60,9 +60,9 @@ const Playlist = () => {
   };
 
   return (
-    <div className="intro-two">
+    <div className="recommended-playlist">
       <motion.div
-        className="playlist-container"
+        className="recommended-playlist-container"
         ref={containerRef}
         variants={containerVariants}
         initial="hidden"
@@ -72,23 +72,22 @@ const Playlist = () => {
       >
         {recommendationData.map((item, index) => (
           <motion.div
-            className="playlist-item"
+            className="recommended-playlist-item"
             key={index}
             variants={itemVariants}
             whileHover={{ scale: 1.05, boxShadow: "0px 10px 20px rgba(0,0,0,0.2)" }}
             onClick={() => handleItemClick(item)}
           >
-            <div className="album-cover">
+            <div className="recommended-playlist-album-img">
               <img
                 src={item.imageUrl}
                 alt={`${item.title} 앨범 커버`}
-                className="album-image"
               />
             </div>
-            <div className="album-details">
+            <div className="recommended-playlist-album-details">
               <h3>{item.title}</h3>
               <p>{item.artistName}</p>
-              <span className="album-name">{item.albumName}</span>
+              <span>{item.albumName}</span>
             </div>
           </motion.div>
         ))}
@@ -129,4 +128,4 @@ const Playlist = () => {
   );
 };
 
-export default Playlist;
+export default RecommendedPlaylist;
