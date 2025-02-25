@@ -1,23 +1,31 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import './css/UserWishlist.css';
 import wishlist from '../assets/videos/wishlist.mp4';
 import { AuthContext } from '../contexts/AuthContext';
 import CreateWishlistModal from './modals/CreateWishlistModal';
 import ReadWishlistModal from './modals/ReadWishlistModal';
-import { IoAdd } from "react-icons/io5";
-import defaultImg from '../assets/images/default.png'
-
-const mockWishlist = [
-  { id: 1, title: "나의 첫 번째 위시리스트", image: defaultImg },
-  { id: 2, title: "나의 두 번째 위시리스트" , image: defaultImg},
-  { id: 3, title: "나의 세 번째 위시리스트", image: defaultImg }
-];
+import UpdateWishlistModal from './modals/UpdateWishlistModal';
+import { IoAdd, IoPencil, IoTrash } from "react-icons/io5";
+import { getWishlists, deleteWishlist } from '../apis/WishlistApi';
 
 const UserWishlist = () => {
-  const { nickname, profileImg } = useContext(AuthContext);
+  const { nickname, profileImg, accessToken } = useContext(AuthContext);
+  const [wishlists, setWishlists] = useState([]);
   const [createModalOpen, setCreateModalOpen] = useState(false);
   const [readModalOpen, setReadModalOpen] = useState(false);
-  const [selectedWishlistId, setSelectedWishlistId] = useState(null);
+  const [updateModalOpen, setUpdateModalOpen] = useState(false);
+  const [selectedWishlist, setSelectedWishlist] = useState(null);
+
+  // 위시리스트 데이터 API 호출
+  useEffect(() => {
+    if (accessToken) {
+      getWishlists(accessToken)
+        .then((data) => {
+          setWishlists(data.data);
+        })
+        .catch((error) => console.error("Error fetching wishlists:", error));
+    }
+  }, [accessToken]);
 
   const handleAddList = () => {
     setCreateModalOpen(true);
@@ -25,16 +33,47 @@ const UserWishlist = () => {
 
   const handleCloseCreateModal = () => {
     setCreateModalOpen(false);
+    if (accessToken) {
+      getWishlists(accessToken)
+        .then((data) => setWishlists(data.data))
+        .catch((error) => console.error("Error fetching wishlists:", error));
+    }
   };
 
-  const handleItemClick = (wishlistId) => {
-    setSelectedWishlistId(wishlistId);
+  const handleItemClick = (wishlist) => {
+    setSelectedWishlist(wishlist);
     setReadModalOpen(true);
   };
 
   const handleCloseReadModal = () => {
     setReadModalOpen(false);
-    setSelectedWishlistId(null);
+    setSelectedWishlist(null);
+  };
+
+  const handleDelete = async (wishlistId) => {
+    if (window.confirm("정말 삭제하시겠습니까?")) {
+      try {
+        await deleteWishlist(wishlistId, accessToken);
+        setWishlists(wishlists.filter(item => item.id !== wishlistId));
+      } catch (error) {
+        console.error("삭제 실패:", error);
+      }
+    }
+  };
+
+  const handleUpdateClick = (wishlist) => {
+    setSelectedWishlist(wishlist);
+    setUpdateModalOpen(true);
+  };
+
+  const handleCloseUpdateModal = () => {
+    setUpdateModalOpen(false);
+    setSelectedWishlist(null);
+    if (accessToken) {
+      getWishlists(accessToken)
+        .then((data) => setWishlists(data.data))
+        .catch((error) => console.error("Error fetching wishlists:", error));
+    }
   };
 
   return (
@@ -50,14 +89,21 @@ const UserWishlist = () => {
           <h1>{nickname}'s Playlist</h1>
         </div>
         <div className="wishlist-list">
-          {mockWishlist.map(item => (
+          {wishlists.map(item => (
             <div
               key={item.id}
               className="wishlist-list-item"
-              onClick={() => handleItemClick(item.id)}
             >
-              <img src={item.image} alt="커버" />
-              <h3>{item.title}</h3>
+              <img src={item.imageUrl} alt="커버" onClick={() => handleItemClick(item)} />
+              <h3 onClick={() => handleItemClick(item)}>{item.title}</h3>
+              <div className="item-actions">
+                <button onClick={(e) => { e.stopPropagation(); handleUpdateClick(item); }} title="수정">
+                  <IoPencil size={16} />
+                </button>
+                <button onClick={(e) => { e.stopPropagation(); handleDelete(item.id); }} title="삭제">
+                  <IoTrash size={16} />
+                </button>
+              </div>
             </div>
           ))}
           <div 
@@ -71,7 +117,13 @@ const UserWishlist = () => {
         {readModalOpen && (
           <ReadWishlistModal 
             onClose={handleCloseReadModal} 
-            wishlistId={selectedWishlistId}
+            wishlistId={selectedWishlist ? selectedWishlist.id : null}
+          />
+        )}
+        {updateModalOpen && selectedWishlist && (
+          <UpdateWishlistModal 
+            onClose={handleCloseUpdateModal} 
+            wishlist={selectedWishlist}
           />
         )}
       </div>

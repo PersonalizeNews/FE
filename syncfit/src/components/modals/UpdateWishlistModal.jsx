@@ -1,20 +1,23 @@
-// src/components/modals/CreateWishlistModal.jsx
-import React, { useState, useContext } from 'react';
+// src/components/modals/UpdateWishlistModal.jsx
+import React, { useState, useContext, useEffect } from 'react';
 import CustomButton from '../CustomButton';
-import { createWishlist } from '../../apis/WishlistApi';
+import { updateWishlist } from '../../apis/WishlistApi';
 import { AuthContext } from '../../contexts/AuthContext';
-import { useLoading } from '../../contexts/LoadingContext';
 import '../css/CreateWishlistModal.css';
 import defaultImg from '../../assets/images/default.png';
 
-const CreateWishlistModal = ({ onClose }) => {
-  const [title, setTitle] = useState('');
-  // coverImage will store the selected File object
+const UpdateWishlistModal = ({ onClose, wishlist }) => {
+  const { accessToken } = useContext(AuthContext);
+  const [title, setTitle] = useState(wishlist.title);
+  // coverImage will store the selected File object (if any)
   const [coverImage, setCoverImage] = useState(null);
   // previewUrl for showing preview image
-  const [previewUrl, setPreviewUrl] = useState(null);
-  const { accessToken } = useContext(AuthContext);
-  const { setLoading } = useLoading();
+  const [previewUrl, setPreviewUrl] = useState(wishlist.imageUrl || defaultImg);
+
+  useEffect(() => {
+    setTitle(wishlist.title);
+    setPreviewUrl(wishlist.imageUrl || defaultImg);
+  }, [wishlist]);
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
@@ -27,27 +30,11 @@ const CreateWishlistModal = ({ onClose }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!title.trim()) return;
-
-    let imageFile = coverImage;
-    if (!imageFile) {
-      try {
-        const response = await fetch(defaultImg);
-        const blob = await response.blob();
-        imageFile = new File([blob], "default.png", { type: blob.type });
-      } catch (error) {
-        console.error("기본 이미지 로딩 실패:", error);
-        return;
-      }
-    }
-
     try {
-      setLoading(true);
-      await createWishlist(title, imageFile, accessToken);
+      await updateWishlist(wishlist.id, title, coverImage, accessToken);
       onClose();
     } catch (error) {
-      console.error('위시리스트 생성 실패:', error);
-    } finally {
-      setLoading(false);
+      console.error('업데이트 실패:', error);
     }
   };
 
@@ -59,7 +46,7 @@ const CreateWishlistModal = ({ onClose }) => {
             {/* 이미지 영역: 클릭하면 파일 선택 */}
             <div className="wishlist-modal-img">
               <input
-                id="coverImageInput"
+                id="updateCoverImageInput"
                 type="file"
                 accept="image/*"
                 onChange={handleImageChange}
@@ -67,7 +54,7 @@ const CreateWishlistModal = ({ onClose }) => {
               />
               <div
                 className="wishlist-modal-img-input"
-                onClick={() => document.getElementById("coverImageInput").click()}
+                onClick={() => document.getElementById("updateCoverImageInput").click()}
               >
                 {previewUrl ? (
                   <img src={previewUrl} alt="커버 미리보기" />
@@ -90,7 +77,7 @@ const CreateWishlistModal = ({ onClose }) => {
           <div className="wishlist-modal-buttons">
             <CustomButton
               type="submit"
-              text="Create"
+              text="Update"
               className="wishlist-modal-button-create"
             />
             <CustomButton
@@ -106,4 +93,4 @@ const CreateWishlistModal = ({ onClose }) => {
   );
 };
 
-export default CreateWishlistModal;
+export default UpdateWishlistModal;
