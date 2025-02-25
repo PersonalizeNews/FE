@@ -1,4 +1,3 @@
-// src/components/UserWishlist.jsx
 import React, { useState, useContext } from 'react';
 import './css/UserWishlist.css';
 import wishlist from '../assets/videos/wishlist.mp4';
@@ -6,11 +5,12 @@ import { AuthContext } from '../contexts/AuthContext';
 import CreateWishlistModal from './modals/CreateWishlistModal';
 import ReadWishlistModal from './modals/ReadWishlistModal';
 import { IoAdd } from "react-icons/io5";
+import defaultImg from '../assets/images/default.png'
 
 const mockWishlist = [
-  { id: 1, title: "나의 첫 번째 위시리스트" },
-  { id: 2, title: "나의 두 번째 위시리스트" },
-  { id: 3, title: "나의 세 번째 위시리스트" }
+  { id: 1, title: "나의 첫 번째 위시리스트", image: defaultImg },
+  { id: 2, title: "나의 두 번째 위시리스트" , image: defaultImg},
+  { id: 3, title: "나의 세 번째 위시리스트", image: defaultImg }
 ];
 
 const UserWishlist = () => {
@@ -56,7 +56,7 @@ const UserWishlist = () => {
               className="wishlist-list-item"
               onClick={() => handleItemClick(item.id)}
             >
-              <img src="https://via.placeholder.com/300" alt="커버" />
+              <img src={item.image} alt="커버" />
               <h3>{item.title}</h3>
             </div>
           ))}

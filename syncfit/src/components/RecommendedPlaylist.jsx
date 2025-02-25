@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import gsap from 'gsap';
 import './css/RecommendedPlaylist.css';
 import { mockData } from '../utils/getMockData';
-import PlaylistModal from './modals/PlaylistModal'; 
+import ReadPlaylistModal from './modals/ReadPlaylistModal'; 
 
 const containerVariants = {
   hidden: {},
@@ -78,7 +78,7 @@ const RecommendedPlaylist = () => {
         ))}
       </motion.div>
       {/* 모달 컴포넌트 */}
-      <PlaylistModal item={selectedItem} onClose={closeModal} />
+      <ReadPlaylistModal item={selectedItem} onClose={closeModal} />
     </div>
   );
 };

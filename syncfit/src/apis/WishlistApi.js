@@ -28,3 +28,27 @@ export const getWishlists = async (accessToken) => {
   });
   return response.data;
 };
+
+export const deleteWishlist = async (wishlistId, accessToken) => {
+  const response = await axios.delete(`${BASE_URL}/wishlist/${wishlistId}`, {
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
+  return response.data;
+};
+
+export const updateWishlist = async (wishlistId, newTitle, accessToken) => {
+  const response = await axios.put(
+    `${BASE_URL}/wishlist/${wishlistId}`,
+    { title: newTitle },
+    {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${accessToken}`,
+      },
+    }
+  );
+  return response.data;
+};

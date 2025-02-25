@@ -42,6 +42,14 @@
   padding: 10px 0px;
 }
 
+.wishlist-list-item img {
+  max-width: 80px;
+  max-height: 80px;
+  object-fit: cover;
+  border-radius: 4px;
+  margin: 0 10px;
+}
+
 .wishlist-list-item:hover {
   background-color: rgba(59, 59, 59, 0.9);
 }
@@ -51,6 +59,13 @@
   margin-left: 10px;
 }
 
+.wishlist-list-item.add-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
 @media (min-width: 1024px) {
   .wishlist-list {
     display: grid;
@@ -58,7 +73,6 @@
     gap: 20px;
   }
   .wishlist-list-item {
-
     display: flex;
     flex-direction: column;
     align-items: center;
