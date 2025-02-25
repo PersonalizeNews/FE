@@ -1,5 +1,11 @@
+.recommended-playlist > h1 {
+  padding: 40px 0px;
+  font-size: 25px;
+  font-family: 'Moneygraphy-Rounded';
+}
+
 .recommended-playlist {
-  padding: 2rem;
+  padding: 0px 2rem 2rem 2rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -58,55 +64,18 @@
   opacity: 0.8;
 }
 
-/* 모달 스타일 */
-.modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
-}
-
-.modal-content {
-  background-color: #fff;
-  border-radius: 12px;
-  padding: 2rem;
-  position: relative;
-  max-width: 90%;
-  width: 500px;
-  box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.2);
-}
-
-.close-button {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  background: transparent;
-  border: none;
-  font-size: 1.25rem;
-  cursor: pointer;
-}
-
-.modal-album-image {
-  width: 100%;
-  height: auto;
-  border-radius: 8px;
-  margin-bottom: 1rem;
-}
 
 /* 반응형 */
-@media (max-width: 768px) {
+@media (min-width: 1024px) {
+  .recommended-playlist {
+    justify-content: center;
+  }
+  .recommended-playlist > h1 {
+    font-size: 40px;
+  }
+
   .recommended-playlist-container {
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   }
-  
-  .modal-content {
-    width: 90%;
-    padding: 1rem;
-  }
+
 }

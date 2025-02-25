@@ -1,10 +1,9 @@
 import React, { useRef, useEffect, useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { useLocation } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import gsap from 'gsap';
 import './css/RecommendedPlaylist.css';
 import { mockData } from '../utils/getMockData';
-
+import PlaylistModal from './modals/PlaylistModal'; 
 
 const containerVariants = {
   hidden: {},
@@ -25,23 +24,10 @@ const itemVariants = {
   },
 };
 
-const overlayVariants = {
-  hidden: { opacity: 0 },
-  visible: { opacity: 1, transition: { duration: 1 } }
-};
-
-const modalVariants = {
-  hidden: { y: "-100vh", opacity: 0 },
-  visible: { y: "0", opacity: 1, transition: { duration: 0.7 } }
-};
-
 const RecommendedPlaylist = () => {
   const containerRef = useRef(null);
   const [selectedItem, setSelectedItem] = useState(null);
   const recommendationData = mockData;
-  // const location = useLocation();
-
-  // const recommendationData = location.state?.recommendationData;
   
   useEffect(() => {
     gsap.fromTo(
@@ -61,14 +47,13 @@ const RecommendedPlaylist = () => {
 
   return (
     <div className="recommended-playlist">
+      <h1>감정 맞춤형 곡 리스트</h1>
       <motion.div
         className="recommended-playlist-container"
         ref={containerRef}
         variants={containerVariants}
         initial="hidden"
         animate="visible"
-        drag="y"
-        dragConstraints={{ top: -100, bottom: 100 }}
       >
         {recommendationData.map((item, index) => (
           <motion.div
@@ -92,38 +77,8 @@ const RecommendedPlaylist = () => {
           </motion.div>
         ))}
       </motion.div>
-
-      <AnimatePresence>
-        {selectedItem && (
-          <motion.div
-            className="modal-overlay"
-            variants={overlayVariants}
-            initial="hidden"
-            animate="visible"
-            exit="hidden"
-            onClick={closeModal}
-          >
-            <motion.div
-              className="modal-content"
-              variants={modalVariants}
-              initial="hidden"
-              animate="visible"
-              exit="hidden"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <button className="close-button" onClick={closeModal}>X</button>
-              <img
-                src={selectedItem.imageUrl}
-                alt={`${selectedItem.title} 앨범 커버`}
-                className="modal-album-image"
-              />
-              <h2>{selectedItem.title}</h2>
-              <p>{selectedItem.artistName}</p>
-              <p>{selectedItem.albumName}</p>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {/* 모달 컴포넌트 */}
+      <PlaylistModal item={selectedItem} onClose={closeModal} />
     </div>
   );
 };
