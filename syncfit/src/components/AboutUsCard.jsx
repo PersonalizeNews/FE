@@ -11,17 +11,17 @@ const AboutUsCard = () => {
 
 
   return (
-    <div className="contact-card">
+    <div className="about-card">
       <motion.div
-        className="contact-card-motion"
+        className="about-card-motion"
         ref={dragRef}
         style={{ x, rotate }}
         drag="x"
         dragConstraints={{ left: -100, right: 100 }}
       >
-        <h1 className="contact-card-title">LG CNS AM CAMP TEAM 3</h1>
-        <h3 className="contact-card-content">{`SyncFit은 사용자의 감정이나 상황을 기반으로 음악을 추천해주는 서비스입니다\n모든 코드와 자료는 오픈소스로 공개합니다`}</h3>
-        <div className="contact-card-icons">
+        <h1 className="about-card-title">LG CNS AM CAMP TEAM 3</h1>
+        <h3 className="about-card-content">{`SyncFit은 사용자의 감정이나 상황을 기반으로 음악을 추천해주는 서비스입니다\n모든 코드와 자료는 오픈소스로 공개합니다`}</h3>
+        <div className="about-card-icons">
           <motion.a
             whileHover={{ scale: 1.1 }}
             href="https://github.com/SyncFit"
