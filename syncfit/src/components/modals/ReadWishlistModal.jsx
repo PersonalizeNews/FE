@@ -1,10 +1,12 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { IoClose, IoTrash } from "react-icons/io5";
-import '../css/ReadWishlistModal.css';
+import { IoClose } from "react-icons/io5";
+import { TbMusicMinus } from "react-icons/tb";
 import { getTracks, deleteTrack } from '../../apis/TrackApi';
 import { AuthContext } from '../../contexts/AuthContext';
+import '../css/ReadWishlistModal.css';
 
-const ReadWishlistModal = ({ onClose, wishlistId }) => {
+const ReadWishlistModal = ({ onClose, wishlistId, wishlist }) => {
+  const { title, imageUrl } = wishlist;
   const { accessToken } = useContext(AuthContext);
   const [tracks, setTracks] = useState([]);
 
@@ -26,7 +28,6 @@ const ReadWishlistModal = ({ onClose, wishlistId }) => {
       try {
         const res = await deleteTrack(trackId, accessToken);
         console.log("Track deleted:", res);
-        // 삭제 후 UI 업데이트: state에서 해당 track 제거
         setTracks(tracks.filter(t => t.trackId !== trackId));
       } catch (error) {
         console.error("Error deleting track:", error);
@@ -36,34 +37,44 @@ const ReadWishlistModal = ({ onClose, wishlistId }) => {
 
   return (
     <div className="read-wishlist-modal">
-      <div className="read-wishlist-modal-container">
-        <div className="read-wishlist-modal-header">
-          <h2>Wishlist {wishlistId} - Tracks</h2>
-          <button className="close-button" onClick={onClose}>
-            <IoClose size={24} />
-          </button>
-        </div>
-        <div className="read-wishlist-modal-content">
-          {tracks.length > 0 ? (
-            tracks.map(track => (
-              <div key={track.trackId} className="track-item">
-                <img src={track.imageUrl} alt={track.title} />
-                <div className="track-info">
-                  <h3>{track.title}</h3>
-                  <p>{track.artistName}</p>
+      <div
+        className="read-wishlist-modal-container"
+        style={{
+          backgroundImage: `url(${imageUrl})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center'
+        }}
+      >
+        {/* 오버레이로 배경 이미지 위 텍스트 가독성 확보 */}
+        <div className="read-wishlist-modal-overlay">
+          <div className="read-wishlist-modal-header">
+            <h2>{title} - Tracks</h2>
+            <button className="close-button" onClick={onClose} style={{ color: "white"}}>
+              <IoClose size={30} />
+            </button>
+          </div>
+          <div className="read-wishlist-modal-content">
+            {tracks.length > 0 ? (
+              tracks.map(track => (
+                <div key={track.trackId} className="track-item" >
+                  <img src={track.imageUrl} alt={track.title} />
+                  <div className="track-info">
+                    <h3>{track.title}</h3>
+                    <p>{track.artistName}</p>
+                  </div>
+                  <button 
+                    className="delete-track-button" 
+                    onClick={() => handleDeleteTrack(track.trackId)}
+                    title="삭제"
+                  >
+                    <TbMusicMinus size={25} />
+                  </button>
                 </div>
-                <button 
-                  className="delete-track-button" 
-                  onClick={() => handleDeleteTrack(track.trackId)}
-                  title="삭제"
-                >
-                  <IoTrash size={16} />
-                </button>
-              </div>
-            ))
-          ) : (
-            <p>No tracks found.</p>
-          )}
+              ))
+            ) : (
+              <p>No tracks found.</p>
+            )}
+          </div>
         </div>
       </div>
     </div>

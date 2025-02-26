@@ -10,13 +10,12 @@ import { getWishlists, deleteWishlist } from '../apis/WishlistApi';
 
 const UserWishlist = () => {
   const { nickname, profileImg, accessToken } = useContext(AuthContext);
-  const [wishlists, setWishlists] = useState([]);
-  const [createModalOpen, setCreateModalOpen] = useState(false);
-  const [readModalOpen, setReadModalOpen] = useState(false);
-  const [updateModalOpen, setUpdateModalOpen] = useState(false);
-  const [selectedWishlist, setSelectedWishlist] = useState(null);
+  const [ wishlists, setWishlists ] = useState([]);
+  const [ createModalOpen, setCreateModalOpen ] = useState(false);
+  const [ readModalOpen, setReadModalOpen ] = useState(false);
+  const [ updateModalOpen, setUpdateModalOpen ] = useState(false);
+  const [ selectedWishlist, setSelectedWishlist ] = useState(null);
 
-  // 위시리스트 데이터 API 호출
   useEffect(() => {
     if (accessToken) {
       getWishlists(accessToken)
@@ -93,16 +92,25 @@ const UserWishlist = () => {
             <div
               key={item.id}
               className="wishlist-list-item"
+              // 항상 배경 이미지로 cover 효과 적용
+              style={{
+                backgroundImage: `url(${item.imageUrl})`,
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+                backgroundRepeat: 'no-repeat'
+              }}
+              onClick={() => handleItemClick(item)}
             >
-              <img src={item.imageUrl} alt="커버" onClick={() => handleItemClick(item)} />
-              <h3 onClick={() => handleItemClick(item)}>{item.title}</h3>
-              <div className="item-actions">
-                <button onClick={(e) => { e.stopPropagation(); handleUpdateClick(item); }} title="수정">
-                  <IoPencil size={16} />
-                </button>
-                <button onClick={(e) => { e.stopPropagation(); handleDelete(item.id); }} title="삭제">
-                  <IoTrash size={16} />
-                </button>
+              <div className="wishlist-item-overlay">
+                <h3>{item.title}</h3>
+                <div className="item-actions">
+                  <button onClick={(e) => { e.stopPropagation(); handleUpdateClick(item); }} title="수정">
+                    <IoPencil size={16} />
+                  </button>
+                  <button onClick={(e) => { e.stopPropagation(); handleDelete(item.id); }} title="삭제">
+                    <IoTrash size={16} />
+                  </button>
+                </div>
               </div>
             </div>
           ))}
@@ -118,6 +126,7 @@ const UserWishlist = () => {
           <ReadWishlistModal 
             onClose={handleCloseReadModal} 
             wishlistId={selectedWishlist ? selectedWishlist.id : null}
+            wishlist={selectedWishlist}
           />
         )}
         {updateModalOpen && selectedWishlist && (

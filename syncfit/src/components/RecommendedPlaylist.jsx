@@ -2,7 +2,6 @@ import React, { useRef, useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import gsap from 'gsap';
 import './css/RecommendedPlaylist.css';
-import { mockData } from '../utils/getMockData';
 import ReadPlaylistModal from './modals/ReadPlaylistModal'; 
 
 const containerVariants = {
@@ -24,10 +23,9 @@ const itemVariants = {
   },
 };
 
-const RecommendedPlaylist = () => {
+const RecommendedPlaylist = ( { recommendationData } ) => {
   const containerRef = useRef(null);
   const [selectedItem, setSelectedItem] = useState(null);
-  const recommendationData = mockData;
   
   useEffect(() => {
     gsap.fromTo(

@@ -31,8 +31,7 @@ const Message = () => {
     try {
       const payload = {"input": input };
       setLoading(true);
-      const recommendationData = mockData;
-      // const recommendationData = await musicRecommendation(payload, accessToken);
+      const recommendationData = await musicRecommendation(payload, accessToken);
       setLoading(false); 
       
       nav("/playlist", { state: { recommendationData } });

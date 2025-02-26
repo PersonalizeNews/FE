@@ -1,7 +1,4 @@
-/* 기존 스타일 유지 */
-
 .read-wishlist-modal {
-  /* 기존 스타일 */
   position: fixed;
   top: 0;
   left: 0;
@@ -15,34 +12,52 @@
 }
 
 .read-wishlist-modal-container {
-  background-color: #fff;
-  border-radius: 12px;
+  position: relative;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 800px;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.read-wishlist-modal-overlay {
+  background: rgba(0, 0, 0, 0.7);
+  border-radius: 10px;
   padding: 2rem;
   position: relative;
-  max-width: 90%;
-  width: 500px;
-  box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.read-wishlist-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.read-wishlist-modal-header h2 {
+  color: var(--sliver);
+  margin: 0;
 }
 
 .close-button {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
   background: transparent;
   border: none;
   font-size: 1.25rem;
   cursor: pointer;
+  color: var(--sliver);
 }
 
+/* 콘텐츠 영역 */
 .read-wishlist-modal-content {
   margin-top: 1rem;
+  color: var(--sliver);
 }
 
+/* 트랙 항목 */
 .track-item {
   display: flex;
   align-items: center;
   padding: 0.5rem;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 2px solid var(--d-grey);
   position: relative;
 }
 
@@ -54,6 +69,11 @@
   margin-right: 0.5rem;
 }
 
+.track-info {
+  max-width: calc(100% - 80px);
+  overflow: hidden;
+}
+
 .track-info h3 {
   margin: 0;
   font-size: 1rem;
@@ -62,7 +82,7 @@
 .track-info p {
   margin: 0;
   font-size: 0.9rem;
-  color: #666;
+  color: var(--l-grey);
 }
 
 /* 삭제 버튼 스타일 */
@@ -72,10 +92,17 @@
   background: transparent;
   border: none;
   cursor: pointer;
-  color: #dc3545;
+  color: var(--error);
   transition: transform 0.2s ease;
 }
 
 .delete-track-button:hover {
   transform: scale(1.1);
+}
+
+/* 반응형: 작은 화면에서 padding 및 font-size 조정 */
+@media (max-width: 768px) {
+  .modal-content-overlay {
+    padding: 1rem;
+  }
 }
