@@ -1,54 +1,49 @@
+/* 기존 스타일 유지 */
+
 .read-wishlist-modal {
+  /* 기존 스타일 */
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0,0,0,0.7);
+  background-color: rgba(0, 0, 0, 0.5);
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
   z-index: 1000;
 }
 
 .read-wishlist-modal-container {
   background-color: #fff;
-  border-radius: 8px;
-  width: 90%;
-  max-width: 500px;
-  padding: 20px;
-}
-
-.read-wishlist-modal-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.read-wishlist-modal-header h2 {
-  margin: 0;
+  border-radius: 12px;
+  padding: 2rem;
+  position: relative;
+  max-width: 90%;
+  width: 500px;
+  box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.2);
 }
 
 .close-button {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
   background: transparent;
   border: none;
+  font-size: 1.25rem;
   cursor: pointer;
 }
 
 .read-wishlist-modal-content {
-  margin-top: 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
+  margin-top: 1rem;
 }
 
 .track-item {
   display: flex;
   align-items: center;
-  gap: 15px;
-  padding: 5px 0px;
-
-  border-bottom: 2px solid var(--l-grey);
+  padding: 0.5rem;
+  border-bottom: 1px solid #ddd;
+  position: relative;
 }
 
 .track-item img {
@@ -56,33 +51,31 @@
   height: 60px;
   object-fit: cover;
   border-radius: 4px;
+  margin-right: 0.5rem;
 }
 
 .track-info h3 {
   margin: 0;
-  font-size: 1.1rem;
+  font-size: 1rem;
 }
 
 .track-info p {
   margin: 0;
-  color: #555;
+  font-size: 0.9rem;
+  color: #666;
 }
 
-.read-wishlist-modal-container {
-  position: relative; /* 닫기 버튼의 위치 기준 */
-  background-color: #fff;
-  border-radius: 8px;
-  width: 90%;
-  max-width: 500px;
-  padding: 20px;
-}
-
-.close-button {
+/* 삭제 버튼 스타일 */
+.delete-track-button {
   position: absolute;
-  top: 10px;
   right: 10px;
   background: transparent;
   border: none;
   cursor: pointer;
-  color: #333;
+  color: #dc3545;
+  transition: transform 0.2s ease;
+}
+
+.delete-track-button:hover {
+  transform: scale(1.1);
 }

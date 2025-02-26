@@ -5,6 +5,7 @@ import '../css/PlaylistModal.css';
 import { addTrack } from '../../apis/TrackApi';
 import { getYoutubeVideo } from '../../apis/YoutubeApi';
 import { AuthContext } from '../../contexts/AuthContext';
+import SelectWishlistModal from './SelectWishlistModal';
 
 const overlayVariants = {
   hidden: { opacity: 0 },
@@ -19,23 +20,32 @@ const modalVariants = {
 const ReadPlaylistModal = ({ item, onClose }) => {
   const { accessToken } = useContext(AuthContext);
   const [videoUrl, setVideoUrl] = useState("");
+  const [selectModalOpen, setSelectModalOpen] = useState(false);
 
   useEffect(() => {
     if (item && accessToken) {
       const query = `${item.title} ${item.artistName}`;
       getYoutubeVideo(accessToken, query)
-      .then((videoId) => {
-        setVideoUrl(`https://www.youtube.com/embed/${videoId}`);
-      })
-      .catch((error) => {
-        console.error("Error fetching YouTube video:", error);
-      });
+        .then((videoId) => {
+          setVideoUrl(`https://www.youtube.com/embed/${videoId}`);
+        })
+        .catch((error) => {
+          console.error("Error fetching YouTube video:", error);
+        });
     }
   }, [item, accessToken]);
 
-  const handleAddTrack = async () => {
+  const handleOpenSelectModal = () => {
+    setSelectModalOpen(true);
+  };
+
+  const handleCloseSelectModal = () => {
+    setSelectModalOpen(false);
+  };
+
+  const handleSelectWishlist = async (wishlistId) => {
     const trackData = {
-      wishlistId: item.wishlistId,
+      wishlistId: wishlistId,
       artistName: item.artistName,
       title: item.title,
       albumName: item.albumName,
@@ -45,6 +55,7 @@ const ReadPlaylistModal = ({ item, onClose }) => {
     try {
       const response = await addTrack(trackData, accessToken);
       console.log('Track added successfully:', response);
+      setSelectModalOpen(false);
       onClose();
     } catch (error) {
       console.error('Error adding track:', error);
@@ -87,9 +98,15 @@ const ReadPlaylistModal = ({ item, onClose }) => {
             <p>{item.artistName}</p>
             <p>{item.albumName}</p>
             {/* 오른쪽 하단 플로팅 추가 버튼 */}
-            <button className="add-track-button" onClick={handleAddTrack}>
-              <IoAdd size={25} />
+            <button className="add-track-button" onClick={handleOpenSelectModal}>
+              <IoAdd size={25} color="white" />
             </button>
+            {selectModalOpen && (
+              <SelectWishlistModal 
+                onClose={handleCloseSelectModal}
+                onSelect={handleSelectWishlist}
+              />
+            )}
           </motion.div>
         </motion.div>
       )}

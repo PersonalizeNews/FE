@@ -4,7 +4,7 @@ const BASE_URL = 'http://ec2-43-202-146-45.ap-northeast-2.compute.amazonaws.com:
 
 export const addTrack = async (trackData, accessToken) => {
   const response = await axios.post(
-    `${BASE_URL}/wishlist/track`,
+    `${BASE_URL}/tracks`,
     trackData,
     {
       headers: {

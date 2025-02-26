@@ -56,7 +56,7 @@ const CreateWishlistModal = ({ onClose }) => {
       <div className="wishlist-modal-container">
         <form onSubmit={handleSubmit}>
           <div className="wishlist-modal-content">
-            {/* 이미지 영역: 클릭하면 파일 선택 */}
+
             <div className="wishlist-modal-img">
               <input
                 id="coverImageInput"
