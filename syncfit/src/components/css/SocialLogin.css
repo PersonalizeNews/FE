@@ -11,3 +11,13 @@
 .social-login img {
   width: 300px
 }
+
+.admin-button {
+  width: 300px;
+  border: none;
+  background-color: var(--l-grey);
+  padding: 15px 0px;
+  border-radius: 5px;
+
+  margin: 20px 0px 0px 0px;
+}

@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const BASE_URL = 'http://spring-server:8080';
+const BASE_URL = 'http://ec2-43-202-146-45.ap-northeast-2.compute.amazonaws.com:8080';
 
 export const addTrack = async (trackData, accessToken) => {
   const response = await axios.post(

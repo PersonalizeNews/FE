@@ -5,6 +5,7 @@ import './css/SocialLogin.css';
 import { useNavigate } from 'react-router-dom';
 import KakaoButton from './KakaoButton';
 import { AuthContext } from '../contexts/AuthContext';
+import { motion } from 'motion/react';
 
 const SocialLogin = () => {
   const REST_API_KEY = import.meta.env.VITE_KAKAO_REST_API;
@@ -35,13 +36,24 @@ const SocialLogin = () => {
           <KakaoButton onClick={handleLogout} />
           {/* Admin 버튼은 role이 "admin" 또는 "ADMIN"일 때만 표시 */}
           {role && role.toLowerCase() === "admin" && (
-            <button className="admin-button" onClick={handleAdmin}>
-              Admin
-            </button>
+            <motion.button 
+              className="admin-button" 
+              onClick={handleAdmin}
+              whileHover={{ scale: 1.05 }}
+            >
+              관리자
+            </motion.button>
           )}
         </>
       ) : (
-        <img src={kakaoImg} alt="카카오 로그인" onClick={handleKakaoLogin} />
+        <motion.img 
+          src={kakaoImg} 
+          alt="카카오 로그인" 
+          onClick={handleKakaoLogin}
+          whileHover={{ scale: 1.05 }}
+          style={{ width: "300px" }}
+        />
+
       )}
     </div>
   );
