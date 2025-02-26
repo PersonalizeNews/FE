@@ -1,27 +1,37 @@
 import React, { useState, useEffect, useContext } from 'react';
 import './css/UserWishlist.css';
-import wishlist from '../assets/videos/wishlist.mp4';
+import wishlistVideo from '../assets/videos/wishlist.mp4';
 import { AuthContext } from '../contexts/AuthContext';
 import CreateWishlistModal from './modals/CreateWishlistModal';
 import ReadWishlistModal from './modals/ReadWishlistModal';
-import UpdateWishlistModal from './modals/UpdateWishlistModal';
 import { IoAdd, IoPencil, IoTrash } from "react-icons/io5";
-import { getWishlists, deleteWishlist } from '../apis/WishlistApi';
+import { FaCheck } from "react-icons/fa6";
+import { RxCross1 } from "react-icons/rx";
+import { getWishlists, deleteWishlist, updateWishlist } from '../apis/WishlistApi';
+import defaultImg from '../assets/images/default.png';
+import { useLoading } from '../contexts/LoadingContext';
 
 const UserWishlist = () => {
   const { nickname, profileImg, accessToken } = useContext(AuthContext);
-  const [ wishlists, setWishlists ] = useState([]);
-  const [ createModalOpen, setCreateModalOpen ] = useState(false);
-  const [ readModalOpen, setReadModalOpen ] = useState(false);
-  const [ updateModalOpen, setUpdateModalOpen ] = useState(false);
-  const [ selectedWishlist, setSelectedWishlist ] = useState(null);
+  const [wishlists, setWishlists] = useState([]);
+  const [createModalOpen, setCreateModalOpen] = useState(false);
+  const [readModalOpen, setReadModalOpen] = useState(false);
+  const [selectedWishlist, setSelectedWishlist] = useState(null);
 
+  // Inline 수정 모드 관련 상태
+  const [editingItemId, setEditingItemId] = useState(null);
+  const [editedTitle, setEditedTitle] = useState("");
+  const [editedImage, setEditedImage] = useState(null);
+  const [editedPreview, setEditedPreview] = useState(null);
+
+  // 로딩
+  const { setLoading } = useLoading();
+
+  // 위시리스트 데이터 API 호출
   useEffect(() => {
     if (accessToken) {
       getWishlists(accessToken)
-        .then((data) => {
-          setWishlists(data.data);
-        })
+        .then((data) => setWishlists(data.data))
         .catch((error) => console.error("Error fetching wishlists:", error));
     }
   }, [accessToken]);
@@ -40,6 +50,8 @@ const UserWishlist = () => {
   };
 
   const handleItemClick = (wishlist) => {
+    // 읽기 모드 호출은 수정 모드가 아닐 때만
+    if (editingItemId === wishlist.id) return;
     setSelectedWishlist(wishlist);
     setReadModalOpen(true);
   };
@@ -60,25 +72,51 @@ const UserWishlist = () => {
     }
   };
 
-  const handleUpdateClick = (wishlist) => {
-    setSelectedWishlist(wishlist);
-    setUpdateModalOpen(true);
+  // 인라인 수정 시작: 수정 아이콘 클릭 시 호출
+  const handleStartEditing = (wishlist) => {
+    setEditingItemId(wishlist.id);
+    setEditedTitle(wishlist.title);
+    setEditedPreview(wishlist.imageUrl || defaultImg);
+    setEditedImage(null);
   };
 
-  const handleCloseUpdateModal = () => {
-    setUpdateModalOpen(false);
-    setSelectedWishlist(null);
-    if (accessToken) {
-      getWishlists(accessToken)
-        .then((data) => setWishlists(data.data))
-        .catch((error) => console.error("Error fetching wishlists:", error));
+  const handleCancelEditing = () => {
+    setEditingItemId(null);
+    setEditedTitle("");
+    setEditedImage(null);
+    setEditedPreview(null);
+  };
+
+  const handleSaveEditing = async (wishlistId) => {
+    try {
+      setLoading(true);
+      await updateWishlist(wishlistId, editedTitle, editedImage, accessToken);
+
+      const data = await getWishlists(accessToken);
+      setWishlists(data.data);
+      setLoading(false);
+      handleCancelEditing();
+    } catch (error) {
+      console.error("업데이트 실패:", error);
     }
+  };
+
+  const handleEditedImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setEditedImage(file);
+      setEditedPreview(URL.createObjectURL(file));
+    }
+  };
+
+  const handleImageClickForEditing = (wishlistId) => {
+    document.getElementById(`editImageInput-${wishlistId}`).click();
   };
 
   return (
     <>
       <video autoPlay loop muted>
-        <source src={wishlist} type="video/mp4" />
+        <source src={wishlistVideo} type="video/mp4" />
       </video>
       <div className="wishlist">
         <div className="wishlist-header">
@@ -92,7 +130,7 @@ const UserWishlist = () => {
             <div
               key={item.id}
               className="wishlist-list-item"
-              // 항상 배경 이미지로 cover 효과 적용
+              // 배경 이미지로 cover 효과
               style={{
                 backgroundImage: `url(${item.imageUrl})`,
                 backgroundSize: 'cover',
@@ -102,15 +140,46 @@ const UserWishlist = () => {
               onClick={() => handleItemClick(item)}
             >
               <div className="wishlist-item-overlay">
-                <h3>{item.title}</h3>
-                <div className="item-actions">
-                  <button onClick={(e) => { e.stopPropagation(); handleUpdateClick(item); }} title="수정">
-                    <IoPencil size={16} />
-                  </button>
-                  <button onClick={(e) => { e.stopPropagation(); handleDelete(item.id); }} title="삭제">
-                    <IoTrash size={16} />
-                  </button>
-                </div>
+                {editingItemId === item.id ? (
+                  <>
+                    <input
+                      type="text"
+                      value={editedTitle}
+                      onChange={(e) => setEditedTitle(e.target.value)}
+                      className="edit-title-input"
+                    />
+                    <div onClick={() => handleImageClickForEditing(item.id)} className="edit-image-container">
+                      <img src={editedPreview} alt="미리보기" className="edit-preview" />
+                      <input
+                        id={`editImageInput-${item.id}`}
+                        type="file"
+                        accept="image/*"
+                        onChange={handleEditedImageChange}
+                        style={{ display: "none" }}
+                      />
+                    </div>
+                    <div className="item-actions">
+                      <button onClick={(e) => { e.stopPropagation(); handleSaveEditing(item.id); }}>
+                        <FaCheck size={16}/>
+                      </button>
+                      <button onClick={(e) => { e.stopPropagation(); handleCancelEditing(); }}>
+                        <RxCross1 size={16}/>
+                      </button>
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <h3 onClick={() => handleItemClick(item)}>{item.title}</h3>
+                    <div className="item-actions">
+                      <button onClick={(e) => { e.stopPropagation(); handleStartEditing(item); }} title="수정">
+                        <IoPencil size={16} />
+                      </button>
+                      <button onClick={(e) => { e.stopPropagation(); handleDelete(item.id); }} title="삭제">
+                        <IoTrash size={16} />
+                      </button>
+                    </div>
+                  </>
+                )}
               </div>
             </div>
           ))}
@@ -126,12 +195,6 @@ const UserWishlist = () => {
           <ReadWishlistModal 
             onClose={handleCloseReadModal} 
             wishlistId={selectedWishlist ? selectedWishlist.id : null}
-            wishlist={selectedWishlist}
-          />
-        )}
-        {updateModalOpen && selectedWishlist && (
-          <UpdateWishlistModal 
-            onClose={handleCloseUpdateModal} 
             wishlist={selectedWishlist}
           />
         )}
