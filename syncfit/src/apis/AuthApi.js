@@ -6,7 +6,11 @@ export const socialLogin = (code) => {
   return axios.post(
     `${BASE_URL}/auth/social-login`,
     { code },
-    { headers: { 'Content-Type': 'application/json' } }
+    { 
+      headers: { 'Content-Type': 'application/json' },
+      withCredentials: true
+    },
+    
   );
 };
 
