@@ -7,9 +7,10 @@ import ReadWishlistModal from './modals/ReadWishlistModal';
 import { IoAdd, IoPencil, IoTrash } from "react-icons/io5";
 import { FaCheck } from "react-icons/fa6";
 import { RxCross1 } from "react-icons/rx";
-import { getWishlists, deleteWishlist, updateWishlist } from '../apis/WishlistApi';
+import { getWishlists, deleteWishlist, updateWishlist, downloadImage } from '../apis/WishlistApi';
 import defaultImg from '../assets/images/default.png';
 import { useLoading } from '../contexts/LoadingContext';
+import { MdFileDownload } from "react-icons/md";
 
 const UserWishlist = () => {
   const { nickname, profileImg, accessToken } = useContext(AuthContext);
@@ -113,6 +114,27 @@ const UserWishlist = () => {
     document.getElementById(`editImageInput-${wishlistId}`).click();
   };
 
+  const handleDownloadImg = async (wishlistId) => {
+    try {
+      setLoading(true);
+      const res = await downloadImage(wishlistId, accessToken);
+      // res.data는 blob 타입으로 반환됨
+      const blob = new Blob([res.data], { type: res.headers['content-type'] });
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `wishlist_${wishlistId}.jpg`;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      window.URL.revokeObjectURL(url);
+      setLoading(false);
+    } catch (error) {
+      console.error("이미지 다운로드 실패:", error);
+      setLoading(false);
+    }
+  };
+
   return (
     <>
       <video autoPlay loop muted>
@@ -176,6 +198,9 @@ const UserWishlist = () => {
                       </button>
                       <button onClick={(e) => { e.stopPropagation(); handleDelete(item.id); }} title="삭제">
                         <IoTrash size={16} />
+                      </button>
+                      <button onClick={(e) => { e.stopPropagation(); handleDownloadImg(item.id); }} title="이미지">
+                        <MdFileDownload size={16} />
                       </button>
                     </div>
                   </>

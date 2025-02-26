@@ -41,19 +41,53 @@ export const deleteWishlist = async (wishlistId, accessToken) => {
 };
 
 export const updateWishlist = async (wishlistId, title, imageFile, accessToken) => {
-  const formData = new FormData();
-  if (title) formData.append("title", title);
-  if (imageFile) formData.append("image", imageFile);
+  const patchFormData = new FormData();
+  if (title) patchFormData.append("title", title);
+  if (imageFile) patchFormData.append("image", imageFile);
 
-  const response = await axios.patch(
+  return axios.patch(
     `${BASE_URL}/wishlist/${wishlistId}`,
-    formData,
+    patchFormData,
     {
       headers: {
         'Content-Type': 'multipart/form-data',
         Authorization: `Bearer ${accessToken}`,
       },
     }
-  );
-  return response.data;
+  )
+  .then((patchRes) => {
+    console.log("PATCH update successful:", patchRes.data);
+    // 이미지 POST 요청 -> Firebase 이미지 저장
+    const postFormData = new FormData();
+    postFormData.append("wishlistId", wishlistId);
+    if (imageFile) {
+      postFormData.append("files", imageFile);
+    }
+    return axios.post(
+      `${BASE_URL}/image`,
+      postFormData,
+      {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          Authorization: `Bearer ${accessToken}`,
+        },
+      }
+    );
+  })
+  .then((postRes) => {
+    console.log("POST files successful:", postRes.data);
+    return postRes.data;
+  });
+};
+
+export const downloadImage = async (wishlistId, accessToken) => {
+  const response = await axios.get(`${BASE_URL}/image`, {
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${accessToken}`,
+    },
+    params: { wishlistId },
+    responseType: 'blob'
+  });
+  return response;
 };
