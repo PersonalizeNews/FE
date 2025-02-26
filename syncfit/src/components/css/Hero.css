@@ -34,10 +34,9 @@ video {
 
 .hero h1 {
   margin: 0;
-  color: #FFD100;
+  color: var(--primary);
   font-size: 100px;
 
-  /* Animation */
   opacity: 0;
   animation: fadeIn 2s ease-out forwards;
 }
@@ -55,6 +54,21 @@ video {
   color: white;
   font-size: 25px;
   text-decoration: none;
-  border-bottom: 2px solid white;
   padding-bottom: 5px;
+}
+
+.hero .hero-link:hover {
+  color: var(--l-grey)
+}
+
+/* 반응형 */
+
+@media (min-width: 1024px) {
+  .hero h1 {
+    font-size: 200px;
+  }
+
+  .hero .hero-link {
+    font-size: 40px;
+  }
 }

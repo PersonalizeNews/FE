@@ -1,16 +1,19 @@
-import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import '../../css/Nav.css';
 
 const links = [
   { name: 'Home', path: '/' },
-  { name: 'Chat', path: '/chat' },
-  { name: 'Contact', path: '/contact' },
-  { name: 'Login', path: '/login' },
+  { name: 'Emotion', path: '/emotion' },
+  { name: 'Wishlist', path: '/wishlist' },
+  { name: 'AboutUs', path: '/aboutus' },
+  { name: 'MyPage', path: '/mypage' },
 ];
 
 const Nav = () => {
-  const location = useLocation(); 
+  const location = useLocation();
+
+  const darkPages = ['/', '/emotion', '/wishlist'];
+  const isDark = darkPages.includes(location.pathname);
 
   return (
     <nav className="nav">
@@ -18,7 +21,7 @@ const Nav = () => {
         <Link
           to={link.path}
           key={index}
-          className={`${link.path === location.pathname ? 'nav-link-active' : 'nav-link'}`}
+          className={`nav-link nav-link-${isDark ? 'dark' : 'light'} ${link.path === location.pathname ? 'nav-link-active' : 'nav-link'}`}
         >
           {link.name}
         </Link>

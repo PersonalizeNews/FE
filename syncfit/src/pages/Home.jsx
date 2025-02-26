@@ -1,12 +1,11 @@
-import React from 'react'
 import Hero from '../components/Hero'
-import Layout from '../components/Layout/Layout'
+import WithoutFooterLayout from '../components/Layout/WithoutFooterLayout'
 
 const Home = () => {
   return (
-    <Layout>
+    <WithoutFooterLayout>
       <Hero />
-    </Layout>
+    </WithoutFooterLayout>
   )
 }
 

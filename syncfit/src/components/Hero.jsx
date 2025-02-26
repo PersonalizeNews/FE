@@ -1,20 +1,19 @@
-import React from 'react'
 import './css/Hero.css'
-import { Link } from 'react-router-dom'
 import hero from '../assets/videos/hero.mp4'
+import CustomLink from './CustomLink'
 
 const Hero = () => {
   return (
     <>
-      <video autoPlay loop muted>
-        <source src={hero} type="video/mp4"/>
+     <video autoPlay loop muted>
+        <source src={hero} type="video/mp4" />
       </video>
       <div className='hero'>
         <h1>SyncFit</h1>
-        <Link to="/chat" className='hero-link'>Try now</Link>
+        <CustomLink to={"/emotion"} className={"hero-link"} text={"Try now"}/>
       </div>
     </>
   )
 }
 
-export default Hero
+export default Hero;
